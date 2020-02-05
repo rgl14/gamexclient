@@ -140,10 +140,10 @@ inplaylistwise = function(sportdata, inplaytype) {
                       //         item3.runnerData['isMulti'] = 1;
                       //     }
                       // })
-                      if (item2.inPlay == 1 && inplaytype == 0 && item.bfId === 4) {
+                      if (item2.inPlay == 1 && inplaytype == 0 && item.bfId === 4 && item3.runnerData.hasbookmaker === 1) {
                         inplaydata.push(item3.runnerData);
                       }
-                      if (item2.inPlay == 0 && inplaytype == 1) {
+                      if (item2.inPlay == 0 && inplaytype == 1 && item.bfId === 4 && item3.runnerData.hasbookmaker === 1) {
                         inplaydata.push(item3.runnerData);
                       }  
                       // else if (item2.inPlay != 1 && inplaytype == 1 && $rootScope.getDateTime(item2.startDate, $rootScope.curTime, 1) == 0 && inplaytype == 1) {
