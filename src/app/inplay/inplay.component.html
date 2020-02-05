@@ -1,0 +1,692 @@
+<div class="content-wrapper ion-page">
+    <mat-tab-group
+    (selectedTabChange)="tabChange($event)"
+    [(selectedIndex)]="selectedIndex"
+    [(tabs)]="tabs"
+    swipeTab
+    *ngIf="showRecentList">
+      <mat-tab (swipe)="onSwipe($event)">
+        <ng-template mat-tab-label class="mat-tab-label-active">IN-PLAY</ng-template>
+        <div class="home-page ion-content event-page content content-md" padding="">
+          <div class="fixed-content   "></div>
+          <div class="scroll-content " (swipe)="onSwipe($event)">
+            <section>
+              <!-- <div class="in-play page-title"> <i class="fa fa-play-circle"></i>
+                <span class="label">In Play</span>
+              </div> -->
+              <!-- <div class="in-play page-title item-block inplayPageTitle" >
+        
+                        <p class="noMatchFoundtitle">No In play Matches.</p>
+        
+                    </div>
+                    <div class="in-play page-title item-block inplayPageTitle" >
+        
+                        <p class="noMatchFoundtitle">Loading...</p>
+        
+                    </div> -->
+              <!-- <a > <span class="open-bets-link" >Open Bets (0)</span>
+              </a> -->
+              <div class="distinct ion-list market-list list list-md" *ngIf="inplayData.length!=0">
+                <!-- <ion-item class="market-list-item item item-block item-md" data-ng-repeat="inplay in inplayData track by $index"> -->
+                <div *ngFor="let inplay of inplayData | sortByDate:'matchDate';trackBy:identify">
+                  <div  class="market-list-item item ion-item item-block item-md" *ngIf="inplay.SportbfId===4">
+                    <div class="item-inner">
+                      <div class="input-wrapper">
+                        <div class="label ion-label label-md">
+                          <a (click)="appcharge(inplay.SportbfId,inplay.TourbfId,inplay.matchId,inplay.marketId,inplay.mtBfId,inplay.bfId)" >
+                            <div class="popular-event">
+                              <div class="event-details">
+                                <div>
+                                  <span class="label-slash-cricket">\</span>
+                                </div>
+                                
+                                <!-- <i class="apl-icon-sport-cricket"><img height="20px" width="20px" src="assets/img/cricket.png"></i> -->
+                                <!-- <i class="apl-icon-sport-kabaddi" data-ng-if="inplay.sportName=='Kabaddi'"><img src="images/kabaddi_black.png"></i> --> 
+                                <div class="event-container">
+                                  <span class="label">{{inplay.matchName}}</span>
+                                  <div class="date-info"> 
+                                    <div class="status">
+                                      <div class="live-icon shine">Live</div>
+                                    </div>
+                                    <div class="status" *ngIf="inplay.hasFancy === 1">
+                                      <div class="fancy-icon shine">Fancy</div>
+                                    </div>
+                                    <div class="status" *ngIf="inplay.hasbookmaker === 1">
+                                      <div class="BM-icon shine">book maker</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- <div class="in-play-icon"> <i class="fa fa-play-circle"></i>
+                              </div> -->
+                            </div>
+                          </a>
+                          <!-- <div class="list-body">
+                            <div>
+                              <div class="market list-item" id="selection-1.143169575-2954265">
+                                <div class="runner-details">
+                                  <div class="title"> <span>{{inplay.runner1Name}}</span>
+                                  </div>
+                                  <div class="pnl">
+                                    <span id="matchodd0_"></span>
+                                  </div>
+                                </div>
+                                <div class="odds-container">
+                                  <div type="back" class="bet-button not-selected" selected-odds>
+                                    <div class="back back-1 spark" id="inplay__back1">
+                                      <div class="price">{{inplay.runner1Back}}</div>
+                                      <div class="market-volume">{{inplay.runner1BackSize}}</div>
+                                    </div>
+                                  </div>
+                                  <div type="lay" class="bet-button not-selected" selected-odds>
+                                    <div class="lay" id="inplay_1_lay1">
+                                      <div class="price">{{inplay.runner1Lay}}</div>
+                                      <div class="market-volume">{{inplay.runner1LaySize}}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="closebetslip" id="betForm-1-2-0" style="display: none;">
+                                <form class="bet-form"  style="transform: translateY(0px);">
+                                  <div class="inputs">
+                                    <div class="item-block odds-stepper input-group odds-stepper-group">
+                                      <label class="label-md">Odds</label>
+                                      <div class="stepper-input">
+                                        <button class="minus disable-hover button button-md button-default button-default-md button-small button-small-md button-md-light" type="button"> <span class="button-inner">-</span>
+                                          <div class="button-effect" style="transform: translate3d(-12px, -21px, 0px) scale(1); height: 64px; width: 64px; opacity: 0; transition: transform 263ms, opacity 184ms 79ms;"></div>
+                                        </button>
+                                        <div class="item ion-item item-block item-md item-input input-has-value item-input-has-value input-has-focus item-input-has-focus">
+                                          <div class="item-inner">
+                                            <div class="input-wrapper">
+                                              <div class="input ion-input input-md">
+                                                <input class="text-input text-input-md" type="text" data-odds-input autocomplete="off">
+                                                <div class="input-cover"></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="button-effect"></div>
+                                        </div>
+                                        <button class="plus disable-hover button button-md button-default button-default-md button-small button-small-md button-md-light" type="button"> <span class="button-inner">+</span>
+                                          <div class="button-effect" style="transform: translate3d(-18px, -16px, 0px) scale(1); height: 64px; width: 64px; opacity: 0; transition: transform 263ms, opacity 184ms 79ms;"></div>
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <div class="input-group input-group-stake">
+                                      <label class="label-md">Stake</label>
+                                      <div class="item ion-item item-block item-md item-input input-has-value item-input-has-value input-has-focus item-input-has-focus">
+                                        <div class="item-inner">
+                                          <div class="input-wrapper">
+                                            <div class="input ion-input input-md no-liability ng-untouched ng-pristine ng-invalid">
+                                              <input class="text-input text-input-md" type="text" maxlength="10" autocomplete="off">
+                                              <div class="input-cover"></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="button-effect"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="input-buttons">
+                                    <button type="button" class="disable-hover button button-md button-default button-default-md button-small button-small-md button-md-cta-action"> <span class="button-inner"></span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                  </div>
+                                  <div class="input-buttons confirmation-buttons">
+                                    <button class="-large disable-hover button button-md button-default button-default-md button-md-cta-secondary" color="cta-secondary" ion-button="" type="button"> <span class="button-inner">Cancel</span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                    <button class="-large disable-hover button button-md button-default button-default-md button-md-cta-primary" color="cta-primary" ion-button="" type="submit"> <span class="button-inner">
+          
+                                                                      <span class="content action">Place Bet</span>
+                                      <span class="content info">120120.00</span>
+                                      </span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                  </div>
+                                  <div class="confirmation-control">Confirm bet before placing
+                                    <div class="confirmation-toggle ion-toggle toggle toggle-md ">
+                                      <div class="toggle-icon">
+                                        <div class="toggle-inner"></div>
+                                      </div>
+                                      <button class="item-cover disable-hover item-cover-md item-cover-default item-cover-default-md" ion-button="item-cover" role="checkbox" type="button"> <span class="button-inner"></span>
+                                        <div class="button-effect" style="opacity: 0;"></div>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="market list-item">
+                                <div class="runner-details">
+                                  <div class="title"> <span>{{inplay.runner2Name}}</span>
+                                  </div>
+                                  <div class="pnl"> <span id="matchodd1_"></span>
+                                  </div>
+                                </div>
+                                <div class="odds-container">
+                                  <div type="back" class="bet-button not-selected" selected-odds>
+                                    <div class="back" id="inplay_1_back2">
+                                      <div class="price">{{inplay.runner2Back}}</div>
+                                      <div class="market-volume">{{inplay.runner2BackSize}}</div>
+                                    </div>
+                                  </div>
+                                  <div type="lay" class="bet-button not-selected" selected-odds>
+                                    <div class="lay" id="inplay_2_lay2">
+                                      <div class="price">{{inplay.runner2Lay}}</div>
+                                      <div class="market-volume">{{inplay.runner2LaySize}}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="closebetslip" id="betForm2-1-0-1" style="display: none;">
+                                <form class="bet-form" style="transform: translateY(0px);">
+                                  <div class="inputs">
+                                    <div class="item-block odds-stepper input-group odds-stepper-group">
+                                      <label class="label-md">Odds</label>
+                                      <div class="stepper-input">
+                                        <button class="minus disable-hover button button-md button-default button-default-md button-small button-small-md button-md-light" type="button"> <span class="button-inner">-</span>
+                                          <div class="button-effect" style="transform: translate3d(-12px, -21px, 0px) scale(1); height: 64px; width: 64px; opacity: 0; transition: transform 263ms, opacity 184ms 79ms;"></div>
+                                        </button>
+                                        <div class="item ion-item item-block item-md item-input input-has-value item-input-has-value input-has-focus item-input-has-focus">
+                                          <div class="item-inner">
+                                            <div class="input-wrapper">
+                                              <div class="input ion-input input-md">
+                                                <input class="text-input text-input-md" type="text" data-odds-input autocomplete="off">
+                                                <div class="input-cover"></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="button-effect"></div>
+                                        </div>
+                                        <button class="plus disable-hover button button-md button-default button-default-md button-small button-small-md button-md-light" type="button"> <span class="button-inner">+</span>
+                                          <div class="button-effect" style="transform: translate3d(-18px, -16px, 0px) scale(1); height: 64px; width: 64px; opacity: 0; transition: transform 263ms, opacity 184ms 79ms;"></div>
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <div class="input-group input-group-stake">
+                                      <label class="label-md">Stake</label>
+                                      <div class="item ion-item item-block item-md item-input input-has-value item-input-has-value input-has-focus item-input-has-focus">
+                                        <div class="item-inner">
+                                          <div class="input-wrapper">
+                                            <div class="input ion-input input-md no-liability ng-untouched ng-pristine ng-invalid">
+                                              <input class="text-input text-input-md" type="text" maxlength="10" autocomplete="off">
+                                              <div class="input-cover"></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="button-effect"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="input-buttons">
+                                    <button type="button" class="disable-hover button button-md button-default button-default-md button-small button-small-md button-md-cta-action"> <span class="button-inner"></span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                  </div>
+                                  <div class="input-buttons confirmation-buttons">
+                                    <button class="-large disable-hover button button-md button-default button-default-md button-md-cta-secondary" color="cta-secondary" ion-button="" type="button"> <span class="button-inner">Cancel</span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                    <button class="-large disable-hover button button-md button-default button-default-md button-md-cta-primary" color="cta-primary" ion-button="" type="submit"> <span class="button-inner">
+          
+                                                                      <span class="content action">Place Bet</span>
+                                      <span class="content info">15240.00</span>
+                                      </span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                  </div>
+                                  <div class="confirmation-control">Confirm bet before placing
+                                    <div class="confirmation-toggle ion-toggle toggle toggle-md">
+                                      <div class="toggle-icon">
+                                        <div class="toggle-inner"></div>
+                                      </div>
+                                      <button class="item-cover disable-hover item-cover-md item-cover-default item-cover-default-md" ion-button="item-cover" role="checkbox" type="button"> <span class="button-inner"></span>
+                                        <div class="button-effect" style="opacity: 0;"></div>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="market list-item" *ngIf="inplay.runner3Name!=null">
+                                <div class="runner-details">
+                                  <div class="title"> <span>{{inplay.runner3Name}}</span>
+                                  </div>
+                                  <div class="pnl"> <span id="matchodd2_2"></span>
+                                  </div>
+                                </div>
+                                <div class="odds-container">
+                                  <div type="back" class="bet-button not-selected" selected-odds>
+                                    <div class="back" id="inplay_3_back3">
+                                      <div class="price">{{inplay.runner3Back}}</div>
+                                      <div class="market-volume">{{inplay.runner3BackSize}}</div>
+                                      <div data-ng-if="inplay.runner3BackSize>=500000">500,000+</div></div>
+                                  </div>
+                                  <div type="lay" class="not-selected bet-button" selected-odds>
+                                    <div class="lay" id="inplay_4_lay3">
+                                      <div class="price">{{inplay.runner3Lay}}</div>
+                                      <div class="market-volume">{{inplay.runner3LaySize}}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="closebetslip " id="betForm-12-13-2" style="display: none;">
+                                <form class="bet-form" style="transform: translateY(0px);">
+                                  <div class="inputs">
+                                    <div class="item-block input-group odds-stepper odds-stepper-group">
+                                      <label class="label-md">Odds</label>
+                                      <div class="stepper-input">
+                                        <button class="minus disable-hover button button-md button-default button-default-md button-small button-small-md button-md-light" type="button"> <span class="button-inner">-</span>
+                                          <div class="button-effect" style="transform: translate3d(-12px, -21px, 0px) scale(1); height: 64px; width: 64px; opacity: 0; transition: transform 263ms, opacity 184ms 79ms;"></div>
+                                        </button>
+                                        <div class="item ion-item item-block item-md item-input input-has-value item-input-has-value input-has-focus item-input-has-focus">
+                                          <div class="item-inner">
+                                            <div class="input-wrapper">
+                                              <div class="input ion-input input-md">
+                                                <input class="text-input text-input-md" type="text" data-odds-input autocomplete="off">
+                                                <div class="input-cover"></div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="button-effect"></div>
+                                        </div>
+                                        <button class="plus disable-hover button button-md button-default button-default-md button-small button-small-md button-md-light" type="button"> <span class="button-inner">+</span>
+                                          <div class="button-effect" style="transform: translate3d(-18px, -16px, 0px) scale(1); height: 64px; width: 64px; opacity: 0; transition: transform 263ms, opacity 184ms 79ms;"></div>
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <div class="input-group input-group-stake">
+                                      <label class="label-md">Stake</label>
+                                      <div class="item ion-item item-block item-md item-input input-has-value item-input-has-value input-has-focus item-input-has-focus">
+                                        <div class="item-inner">
+                                          <div class="input-wrapper">
+                                            <div class="input ion-input input-md no-liability ng-untouched ng-pristine ng-invalid">
+                                              <input class="text-input text-input-md" type="text" maxlength="10" autocomplete="off" placeholder="Max Bet: 1" data-numbers-only>
+                                              <div class="input-cover"></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="button-effect"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="input-buttons">
+                                    <button type="button" class="disable-hover button button-md button-default button-default-md button-small button-small-md button-md-cta-action"> <span class="button-inner"></span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                  </div>
+                                  <div class="input-buttons confirmation-buttons">
+                                    <button class="-large disable-hover button button-md button-default button-default-md button-md-cta-secondary" color="cta-secondary" ion-button="" type="button"> <span class="button-inner">Cancel</span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                    <button class="-large disable-hover button button-md button-default button-default-md button-md-cta-primary" color="cta-primary" ion-button="" type="submit"> <span class="button-inner">
+          
+                                                                      <span class="content action">Place Bet</span>
+                                      <span class="content info">12000.00</span>
+                                      </span>
+                                      <div class="button-effect"></div>
+                                    </button>
+                                  </div>
+                                  <div class="confirmation-control">Confirm bet before placing
+                                    <div class="confirmation-toggle ion-toggle toggle toggle-md">
+                                      <div class="toggle-icon">
+                                        <div class="toggle-inner"></div>
+                                      </div>
+                                      <button class="item-cover disable-hover item-cover-md item-cover-default item-cover-default-md" ion-button="item-cover" role="checkbox" type="button"> <span class="button-inner"></span>
+                                        <div class="button-effect" style="opacity: 0;"></div>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                            <div style="display: none;">
+                              <div class="market-suspended">
+                                <div class="runners">
+                                  <div>
+                                    <div class="list-item">
+                                      <div class="details">
+                                        <div class="title">India</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div class="list-item">
+                                      <div class="details">
+                                        <div class="title">Pakistan</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div class="list-item">
+                                      <div class="details">
+                                        <div class="title">Draw</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="suspended">
+                                  <div class="inner">Suspended</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="button-effect"></div>
+                  </div>
+                </div>
+                <!-- <div *ngFor="let inplay of inplayData | sortByDate:'matchDate';trackBy:identify">
+                    <div *ngIf="inplay.SportbfId===1"  class="market-list-item item ion-item item-block item-md">
+                        <div class="item-inner">
+                          <div class="input-wrapper">
+                            <div class="label ion-label label-md">
+                              <a class="" (click)="appcharge(inplay.SportbfId,inplay.TourbfId,inplay.matchId,inplay.marketId,inplay.mtBfId,inplay.bfId)" >
+                                <div class="popular-event">
+                                  <div class="event-details"> 
+                                    <div>
+                                      <span class="label-slash-soccer">\</span>
+                                    </div>
+                                    <span class="label ">{{inplay.matchName}}</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="button-effect"></div>
+                    </div>
+                </div> -->
+                <!-- <div *ngFor="let inplay of inplayData | sortByDate:'matchDate';trackBy:identify">
+                    <div *ngIf="inplay.SportbfId===2" class="market-list-item item ion-item item-block item-md">
+                        <div class="item-inner">
+                          <div class="input-wrapper">
+                            <div class="label ion-label label-md">
+                              <a class="" (click)="appcharge(inplay.SportbfId,inplay.TourbfId,inplay.matchId,inplay.marketId,inplay.mtBfId,inplay.bfId)" >
+                                <div class="popular-event">
+                                  <div class="event-details"> 
+                                    <div>
+                                      <span class="label-slash-tennis">\</span>
+                                    </div>
+                                    <span class="label ">{{inplay.matchName}}</span>
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="button-effect"></div>
+                      </div>
+                </div> -->
+              </div>
+              <div class="distinct ion-list market-list list list-md" *ngIf="inplayData.length==0">
+                <h5>No Inplay Events...</h5>
+              </div>
+            </section>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab (swipe)="onSwipe($event)">
+        <ng-template mat-tab-label>UPCOMING</ng-template>
+        <div class="home-page ion-content event-page content content-md" padding="">
+          <div class="fixed-content   "></div>
+          <div class="scroll-content " (swipe)="onSwipe($event)">
+            <section>
+              <div class="in-play page-title">
+                <!-- <i class="fa fa-play-circle"></i>
+        
+                        <span class="label">In Play</span> -->
+              </div>
+              <!-- <div class="in-play page-title item-block inplayPageTitle" >
+        
+                        <p class="noMatchFoundtitle">No In play Matches.</p>
+        
+                    </div>
+                    <div class="in-play page-title item-block inplayPageTitle" >
+        
+                        <p class="noMatchFoundtitle">Loading...</p>
+        
+                    </div> -->
+              <!-- <a > <span class="open-bets-link">Open Bets (0)</span>
+              </a> -->
+              <div class="distinct ion-list market-list list list-md" *ngIf="upcomingEvents.length!=0">
+                <div *ngFor="let upcoming of upcomingEvents | sortByDate:'matchDate';trackBy:identify">
+                    <div *ngIf="upcoming.SportbfId===4" class="market-list-item ion-item item item-block item-md">
+                        <div class="item-inner">
+                          <div class="input-wrapper">
+                            <div class="label ion-label label-md">
+                              <a class="" (click)="appcharge(upcoming.SportbfId,upcoming.TourbfId,upcoming.matchId,upcoming.marketId,upcoming.mtBfId,upcoming.bfId)" >
+                                <div class="popular-event">
+                                  <div class="event-details"> 
+                                    <!-- <i><img height="20px" width="20px" src="assets/img/cricket.png"></i> -->
+                                    <div>
+                                      <span class="label-slash-cricket">\</span>
+                                    </div>
+                                    <div class="event-container">
+                                      <span class="label">{{upcoming.matchName}}</span>
+                                      <div class="date-info"> 
+                                        <div class="status">
+                                          <div class="match-date">{{upcoming.matchDate}}</div>
+                                        </div>
+                                        <div class="status" *ngIf="upcoming.hasFancy === 1">
+                                          <div class="fancy-icon shine">Fancy</div>
+                                        </div>
+                                        <div class="status" *ngIf="upcoming.hasbookmaker === 1">
+                                          <div class="BM-icon shine">book maker</div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- <div class="in-upcomming-icon"> <i class="fa fa-clock-o fa-2"></i>
+                                  </div> -->
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="button-effect"></div>
+                    </div>
+                </div>
+                <!-- <div *ngFor="let upcoming of upcomingEvents | sortByDate:'matchDate';trackBy:identify">
+                    <div *ngIf="upcoming.SportbfId===1" class="market-list-item ion-item item item-block item-md">
+                        <div class="item-inner">
+                          <div class="input-wrapper">
+                            <div class="label ion-label label-md">
+                              <a class="" (click)="appcharge(upcoming.SportbfId,upcoming.TourbfId,upcoming.matchId,upcoming.marketId,upcoming.mtBfId,upcoming.bfId)">
+                                <div class="popular-event">
+                                  <div class="event-details"> 
+                                    <div>
+                                      <span class="label-slash-soccer">\</span>
+                                    </div>
+                                    <div style="margin:5px">
+                                      <span class="">{{upcoming.matchName}}</span>
+                                      <p class="date-info"> <span class="">{{upcoming.matchDate}}</span></p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="button-effect"></div>
+                    </div>
+                </div>
+                <div  *ngFor="let upcoming of upcomingEvents | sortByDate:'matchDate';trackBy:identify">
+                    <div *ngIf="upcoming.SportbfId===2" class="market-list-item ion-item item item-block item-md">
+                        <div class="item-inner">
+                          <div class="input-wrapper">
+                            <div class="label ion-label label-md">
+                              <a class="" (click)="appcharge(upcoming.SportbfId,upcoming.TourbfId,upcoming.matchId,upcoming.marketId,upcoming.mtBfId,upcoming.bfId)">
+                                <div class="popular-event">
+                                  <div class="event-details"> 
+                                    <div>
+                                      <span class="label-slash-tennis">\</span>
+                                    </div>
+                                    <div style="margin:5px">
+                                      <span class="">{{upcoming.matchName}}</span>
+                                      <p class="date-info"> <span class="">{{upcoming.matchDate}}</span></p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="button-effect"></div>
+                    </div>
+                </div> -->
+              </div>
+              <div class="distinct ion-list market-list list list-md" *ngIf="upcomingEvents.length==0">
+                <h5>No Upcoming Events</h5>
+              </div>
+            </section>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab (swipe)="onSwipe($event)">
+        <ng-template mat-tab-label>RECENT</ng-template>
+        <div class="home-page ion-content event-page content content-md" padding="" *ngIf="showRecentList">
+          <div class="fixed-content   "></div>
+          <div class="scroll-content " (swipe)="onSwipe($event)">
+            <section>
+              <div class="in-play page-title">
+              </div>
+              <!-- <div class="in-play page-title item-block inplayPageTitle" >
+        
+                        <p class="noMatchFoundtitle">No Recent Matches.</p>
+        
+                    </div>
+                    <div class="in-play page-title item-block inplayPageTitle" >
+        
+                        <p class="noMatchFoundtitle">Loading...</p>
+        
+                    </div> -->
+              <!-- <a > <span class="open-bets-link">Open Bets (0)</span>
+              </a> -->
+              <ng-container *ngFor="let pnldata of pnlData ">
+              <div class="recent-container" (click)="showBetsTable(pnldata)" *ngIf="filterSport('cricket', pnldata)">
+              <div class="distinct ion-list market-list list list-md">
+                <div class="market-list-item ion-item item item-block item-md">
+                  <div class="item-inner">
+                    <div class="input-wrapper">
+                      <div class="label ion-label label-md">
+                        <a class="">
+                          <div class="popular-event">
+                            <div class="event-details"> 
+                              <!-- <i>
+                                <img *ngIf="pnldata.market.split(' > ')[0]=='Tennis'" height="20px" width="20px" src="assets/img/tennis_ball.ico">
+                                <img *ngIf="pnldata.market.split(' > ')[0]=='Soccer'" height="20px" width="20px" src="assets/img/soccer_ball.ico">
+                                <img *ngIf="pnldata.market.split(' > ')[0]=='Cricket'" height="20px" width="20px" src="assets/img/cricket.png">
+                              </i> -->
+                              <!-- <span class="label ">{{pnldata.market.split(' > ')[1]}}</span>
+                              <p class="date-info"> <span class="">{{pnldata.settleDate}}</span>
+                              </p> -->
+                              <div>
+                                <span class="label-slash-tennis">\</span>
+                              </div>
+                              <div class="event-container">
+                                <span class="label">{{pnldata.market.split(' > ')[1]}}</span>
+                                <div class="date-info"> 
+                                  <div class="status">
+                                    <div class="match-date">{{pnldata.settleDate}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div style="font-weight:bolder;" [ngClass]="(pnldata.pnl >= 0)?'text-success':'text-danger'">
+                              {{pnldata.pnl|number:'1.2-2'}}
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="button-effect"></div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+            </section>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+
+    <ng-container *ngIf="!showRecentList">
+      <div class="bets-container">
+        <button mat-icon-button (click)="showRecentList = true" class="btn-back">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <div class="bets-header">
+          <h4>{{ betsTable.matchName }}</h4>
+        </div>
+        <div class="bets-body">
+            <div class="bets">
+              <div class="bet" *ngFor="let bet of betsTable.bets.data; trackBy: trackById;">
+                <div class="selection-block">
+                  <div class="left-block">
+                    <div class="selection-container">
+                    <span class="label selection-label">Selection: </span> <span class="value selection-value">{{ bet.selection }}</span>
+                    </div>
+                    <div class="bet-id-container">
+                      <span class="label bet-id-label">Bet Id: </span> <span class="value bet-id-value">{{ bet.betId }}</span>
+                    </div>
+                    <div class="placed-container">
+                      <span class="label placed-label">Placed: </span> <span class="value placed-value">{{ bet.placed }}</span>
+                    </div>
+                  </div>
+                  <div class="right-block">
+                    <div class="status-container">
+                      <span class="label status-label">Status: </span><span class="value status-value">{{ getStatus(bet.pnl) }}</span>
+                    </div>
+                    <div class="profit-loss-container">
+                      <span class="label profit-loss-label">Profit/Loss: </span><span class="value profit-loss-value">{{ bet.pnl }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bet-summary-block">
+                  <div class="type-container">
+                    <span class="label type-label">Type</span><span class="value type-value">{{ bet.type | titlecase }}</span>
+                  </div>
+                  <div class="odds-container">
+                    <span class="label odds-label">Odds</span><span class="value odds-value">{{ bet.odds }}</span>
+                  </div>
+                  <div class="stake-container">
+                    <span class="label stake-label">Stake</span><span class="value stake-value">{{ bet.stake }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bets-summary-container">
+                <div class="back-total-container">
+                  <span class="back-total-label">Back Total: </span>
+                  <span class="value back-total-value" [ngClass]="betsTable.bets.backTotal > 0? 'text-success':'text-danger'">{{ betsTable.bets.backTotal }}</span>
+                </div>
+                <div class="lay-subtotal-container">
+                  <span class="lay-subtotal-label">Lay Subtotal: </span>
+                  <span class="value lay-subtotal-value" [ngClass]="betsTable.bets.layTotal > 0? 'text-success':'text-danger'">{{ betsTable.bets.layTotal }}</span>
+                </div>
+                <div class="market-total-container">
+                  <span class="market-total-label">Market Total: </span>
+                  <span class="value market-total-value" [ngClass]="betsTable.bets.mktTotal > 0? 'text-success':'text-danger'">{{ betsTable.bets.mktTotal }}</span>
+                </div>
+                <div class="commission-container">
+                  <span class="commission-label">Commission: </span>
+                  <span class="value commission-value" [ngClass]="betsTable.bets.comm > 0? 'text-success':'text-danger'">{{ betsTable.bets.comm }}</span>
+                </div>
+                <div class="net-market-total">
+                  <span class="label net-market-label">
+                    Net Market Total: 
+                  </span>
+                  <span class="value net-market-value" [ngClass]="betsTable.bets.netMktTotal > 0? 'text-success':'text-danger'">
+                    {{ betsTable.bets.netMktTotal? betsTable.bets.netMktTotal: 0 }}
+                  </span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+<app-search></app-search>

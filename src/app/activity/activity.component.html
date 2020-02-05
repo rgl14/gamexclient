@@ -1,0 +1,38 @@
+<div class="content-wrapper">
+        <div class="contentHeading borderGreen _1zgNi">
+           <span class="_2NnB6">Activity Log</span>
+        </div>
+        <div class="inner-content">
+          
+           <div class="reports-table">
+              <mat-form-field class="search-form-field" floatLabel="never">
+                 <input matInput  id="filter-text-box" placeholder="Search" autocomplete="off" (keyup)="onFilterTextBoxChanged()" >
+              </mat-form-field>
+              <mat-form-field class="select-page-size">
+                 <mat-label>Page Size</mat-label>
+                 <select matNativeControl (change)="onPageSizeChanged($event)" id="page-size">
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                 </select>
+              </mat-form-field>
+              <ag-grid-angular 
+              [ngStyle]="{ 'height': innerHeight-282 + 'px' }"
+              style="width: 100%;" 
+              class="ag-theme-balham"     
+              [gridOptions]="gridOptions"
+              [rowData]="rowData" 
+              [headerHeight]="headerHeight"
+              [defaultColDef]="defaultColDef"
+              [overlayLoadingTemplate]="overlayLoadingTemplate"
+              [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+              [animateRows]="true"
+              [pagination]="true"
+              (gridReady)="onGridReady($event)"
+              >
+              </ag-grid-angular>
+           </div>
+        </div>
+</div>

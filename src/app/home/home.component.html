@@ -1,0 +1,131 @@
+<!-- <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Cricket
+        </mat-panel-title>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <mat-card class="card">
+          <mat-card-header>
+              <div mat-card-avatar><mat-icon><i class="fa fa-circle"></i></mat-icon></div>
+            <mat-card-title>Sydney Sixers WBBL v Brisbane Heat WBBL</mat-card-title>
+            <mat-card-subtitle>In-Play</mat-card-subtitle>
+            <div><mat-icon>favorite_border</mat-icon></div>
+          </mat-card-header>
+        </mat-card>
+        <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar><mat-icon><i class="fa fa-circle" aria-hidden="true"></i></mat-icon></div>
+            <mat-card-title>West Indies Women v India Women</mat-card-title>
+            <mat-card-subtitle>In-Play</mat-card-subtitle>
+            <div><mat-icon>favorite_border</mat-icon></div>
+          </mat-card-header>
+        </mat-card>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Soccer
+        </mat-panel-title>
+        <mat-panel-description>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>Sydney Sixers WBBL v Brisbane Heat WBBL</mat-card-title>
+            <mat-icon>favorite_border</mat-icon>
+            <mat-card-subtitle>In-Play</mat-card-subtitle>
+          </mat-card-header>
+      </mat-card>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Tennis
+          </mat-panel-title>
+          <mat-panel-description>
+            
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <mat-card class="card">
+            <mat-card-header>
+              <mat-card-title>Sydney Sixers WBBL v Brisbane Heat WBBL</mat-card-title>
+              <mat-icon>favorite_border</mat-icon>
+              <mat-card-subtitle>In-Play</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+      </mat-expansion-panel>
+  </mat-accordion> -->
+<div class="content-wrapper">
+  <div class="flex-row flex-row-container-guttering felxSteps">
+      <div class=" col--xs-12 col--sm-12 col--md-12 col--lg-12">
+          <!-- <h3 class="flex-row--title">3 Quick and Secure Steps To Get Your Welcome Bonus</h3> -->
+          <div class="flex-row flex-row--gutterless felxSteps__inner">
+                  <div class="col col--xs-12 col--sm-12 col--md-4 col--lg-4 felxSteps__inner__item">
+                      <a>
+                          <h3>1<span>\</span></h3>
+                          <div>
+                              <h4>Username</h4>
+                              <p>{{userdesc}}</p>
+                          </div>
+                      </a>
+                  </div>
+                  <div class="col col--xs-12 col--sm-12 col--md-4 col--lg-4 felxSteps__inner__item">
+                      <a >
+                          <h3>2<span>\</span></h3>
+                          <div>
+                              <h4>Balance</h4>
+                              <p style="color: #00a826;">₹ {{balance | number : '1.2-2'}}</p>
+                          </div>
+                      </a>
+                  </div>
+                  <div class="col col--xs-12 col--sm-12 col--md-4 col--lg-4 felxSteps__inner__item">
+                      <a>
+                          <h3>3<span>\</span></h3>
+                          <div>
+                              <h4>Exposure</h4>
+                              <p [ngClass]="(exposure >= 0)?'text-success':'text-danger'">{{exposure | number : '1.2-2'}}</p>
+                          </div>
+                      </a>
+                  </div>
+          </div>
+      </div>
+  </div>
+  <carousel>
+    <slide>
+      <div class="text-center py-5 bg-dark text-white">
+        <h2>First custom content</h2>
+        <div class="lead">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </slide>
+    <slide>
+      <div class="text-center py-5 bg-dark text-white">
+        <h2>Second custom content</h2>
+        <div class="lead">
+          <h3>Second slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </div>
+    </slide>
+    <slide>
+      <div class="text-center py-5 bg-dark text-white">
+        <h2>Third custom content</h2>
+        <div class="lead">
+          <h3>Third slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum. </p>
+        </div>
+      </div>
+    </slide>
+  </carousel>
+
+  <app-search></app-search>
+</div>

@@ -1,0 +1,51 @@
+nav .select button{
+    color:black !important;
+    font-weight: 600;
+  }
+  nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color:#fff;  
+        // box-shadow: 0px -4px 3px rgba(227, 233, 232, 0.75);
+    /* color: grey; */
+    z-index: 10;
+    border-top: 1px solid #c2c0c0
+  }
+  
+  nav ul{
+    margin:0;
+    padding: 0;
+  }
+  ul li{
+    list-style: none !important;
+  }
+  nav .mat-button {
+    width: 20vw;
+    /* height: 13.33333vw; */
+    padding: 0;
+    height: 55px;
+    color: #706a6acf;
+    /* font-size: 3.2vw; */
+    line-height: 2;
+    /* padding: 1.86667vw 2.66667vw 0; */
+  }
+  nav mat-icon{
+    height:12px !important;
+  }
+  nav .mat-button{
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
+  }
+
+nav mat-icon span{
+    transition:1s;
+}
+nav button.select{
+  padding-bottom: 8px;
+}
+

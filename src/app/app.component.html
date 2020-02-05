@@ -1,0 +1,3 @@
+
+<app-main *ngIf="isLoggedin"></app-main>
+<app-login (isloggedin)="checkloggedin($event)" *ngIf="!isLoggedin"></app-login>

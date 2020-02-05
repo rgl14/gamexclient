@@ -1,0 +1,137 @@
+@import 'https://fonts.googleapis.com/css?family=Staatliches&display=swap';
+$primary: #0a4949;
+$accent: yellow;
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("/assets/img/background.jpg");
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'), 
+         local('MaterialIcons-Regular'), 
+         url(https://fonts.gstatic.com/s/materialicons/v21/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2');
+}
+  
+.material-icons {
+    font-family: 'Material Icons';
+}
+.input-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    color: yellow;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#loginBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #404040;
+}
+
+#loginRoot {
+    min-height: 470px;
+    min-width: 350px;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+::placeholder {
+    color: #fff;
+    opacity: .9;
+}
+.form-input {
+    width: 100%;
+    border: none;
+    padding: 5px;
+    // border-radius: 5px;
+    border-radius: 25px;
+    height: 46px;
+    background:rgba(255, 255, 255, 0.15);
+    color: #fff;
+    outline: none;
+    padding-left: 12px;
+    transition: background 400ms ease;
+
+    &:focus {
+        background: #dadada;
+        color: #1e1e1e;
+        box-shadow: 0px 6px 4px -3px rgba(0, 0, 0, 0.21);
+
+        &::placeholder {
+            color: #1e1e1e;
+        }
+    }
+}
+.btn-width{
+    background: #9aca08;
+    width: 100% !important;
+    border-radius: 25px;
+    font-weight: bolder;
+    color: white;
+}
+#formRoot {
+    width: 80%;
+    z-index: 10;
+}
+.logo {
+    position: relative;
+    font-family: 'Staatliches', cursive;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 90%;
+    }
+    h1 {
+        font-size: 60px;
+        color: #003348;
+        text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.41);
+        text-transform: uppercase;
+        // background: -webkit-linear-gradient(180deg, #009fdc, #eee);
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
+
+        &:after {
+            content: "Exchange";
+            position: absolute;
+            right: -8px;
+            top: 60px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #eee;
+            text-transform: none;
+        }
+    }
+}
+.custom-control-label {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.btn {
+    height: 45px;
+    width: 90px;
+    &.raised {
+        box-shadow: 0 3px 6px -2px rgba(0, 0, 0, 0.23), 0 3px 3px -3px rgba(0, 0, 0, 0.16);
+    }
+}
