@@ -10,6 +10,8 @@ import { DeviceDetectorService } from "ngx-device-detector";
 import { NotificationService } from '../shared/notification.service';
 import { ScoreboardService } from '../scoreboard.service';
 import { SharedataService } from '../sharedata.service';
+import { HttpParams } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-fullmarket',
@@ -76,10 +78,22 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   TvWidth: number;
   bmexposure: any;
   fancypanelsetting: any;
+  
 
   isGameX: boolean = false;
 
-  constructor(private route:ActivatedRoute,private common :CommonService,private sharedata:SharedataService,private dataformat:DataFormatService,private marketodds:MarketsService,private fancymarket :FancyService,private renderer:Renderer,private deviceInfo:DeviceDetectorService,public notification :NotificationService,private score:ScoreboardService) { }
+  constructor(
+    private route:ActivatedRoute,
+    private common :CommonService,
+    private sharedata:SharedataService,
+    private dataformat:DataFormatService,
+    private marketodds:MarketsService,
+    private fancymarket :FancyService,
+    private renderer:Renderer,
+    private deviceInfo:DeviceDetectorService,
+    public notification :NotificationService,
+    private score:ScoreboardService,
+    private cookie:CookieService) { }
 
   ngOnInit() {
     this.TvWidth = window.innerWidth;
@@ -105,6 +119,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       let MatchScoreHubAddress = "http://178.238.236.221:13684";
       this.score.MatchScoreSignalr(MatchScoreHubAddress, this.mtBfId);
     }
+    this.setToken();
   }
   identify(index,item){
     return item.mktId;
@@ -112,7 +127,21 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   trackByfancyId(index, fancy) {
     return fancy.id;
   }
-   
+
+  
+
+  setToken(){
+    var url_string = window.location.href; //window.location.href
+    // console.log(url_string.split("#").join("."))
+    var url = new URL(url_string.split("#").join("."));
+    // console.log(url)
+    var auth = url.searchParams.get("token");
+    // console.log(auth);
+    if(auth!=null){
+      this.cookie.set( 'charlie', auth );
+    }
+  }
+
   allMKTdata(){
     var eventdatacount=0;
       this.eventData=this.dataformat.navigationSource.subscribe(data=>{
