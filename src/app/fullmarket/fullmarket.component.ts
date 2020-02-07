@@ -136,7 +136,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     var url = new URL(url_string.split("#").join("."));
     // console.log(url)
     var auth = url.searchParams.get("token");
-    // console.log(auth);
+    console.log(auth);
     if(auth!=null){
       this.cookie.set( 'charlie', auth );
     }
@@ -147,7 +147,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       this.eventData=this.dataformat.navigationSource.subscribe(data=>{
         if(data!=null){
           eventdatacount++;
-          console.log(data)
+          // console.log(data)
           this.AllMarketData=data;
           this.subscribedEventdata=this.AllMarketData[this.sprtId].tournaments[this.tourId].matches[this.matchId];
           this.bookMakingData=this.subscribedEventdata.bookRates;
