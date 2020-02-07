@@ -79,6 +79,35 @@
     }
 }
 
+.orbitx-mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border-radius: 8px;
+    margin: 8px;
+
+    .link-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #404040;
+        width: 80%;
+        height: 100%;
+        border-radius: 4px;
+    }
+
+    a {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+    }
+}
+
 .back-total-container, .lay-subtotal-container, .market-total-container, .commission-container, .net-market-total {
     display: flex;
     & > span {
