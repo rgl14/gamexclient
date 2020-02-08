@@ -72,7 +72,7 @@ export class InplayComponent implements OnInit,OnDestroy {
         }
     this.commonservice.marketprofitloss(pnldates).subscribe(resp =>{
       this.pnlData=resp.data;
-      console.log(this.pnlData)
+      // console.log(this.pnlData)
     })
   }
   appcharge(SportbfId,TourbfId,matchId,marketId,mtBfId,bfId){
