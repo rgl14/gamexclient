@@ -78,12 +78,8 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   TvWidth: number;
   bmexposure: any;
   fancypanelsetting: any;
-<<<<<<< HEAD
   matchbets=[];
   allmatchbetsource: Subscription;
-=======
-  
->>>>>>> cd5ac39c249063d7bbf2a7c1cc55ccc0c3471d01
 
   isGameX: boolean = false;
 
