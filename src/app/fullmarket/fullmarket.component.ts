@@ -76,6 +76,8 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   TvWidth: number;
   bmexposure: any;
   fancypanelsetting: any;
+  matchbets=[];
+  allmatchbetsource: Subscription;
 
   isGameX: boolean = false;
 
@@ -139,6 +141,14 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           if(eventdatacount===1){
             this.hubaddress();
           }
+        }
+      })
+      this.allmatchbetsource=this.sharedata.allMatchUnmatchBetsSource.subscribe(resp=>{
+        if(resp!=null){
+          // console.log(resp._userMatchedBets[this.matchId])
+          // this.matchbets=this.dataformat.matchUnmatchBetsFormat(resp,this.matchId);
+          this.matchbets=resp._userMatchedBets[this.matchId];
+          // console.log(this.matchbets);
         }
       })
   }
@@ -453,6 +463,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   }
   ngOnDestroy() {
     this.eventData.unsubscribe();
+    this.allmatchbetsource.unsubscribe();
     this.marketodds.UnsuscribeMarkets(this.homeMarkets);
     this.fancymarket.UnsuscribeFancy(this.matchId);
     this.score.unSubscribeMatchScore(this.mtBfId);

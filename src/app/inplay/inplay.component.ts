@@ -118,6 +118,10 @@ export class InplayComponent implements OnInit,OnDestroy {
     return item.id;
   }
 
+  goToOrbitX(event) {
+    window.open("http://newclient.duoexchange.com", "_blank");
+  }
+
   ngOnDestroy(){
     this.inplaydatanavigation.unsubscribe();
   }
