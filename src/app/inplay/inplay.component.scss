@@ -79,6 +79,20 @@
     }
 }
 
+.no-data-found{
+    padding: 5px;
+    text-align: center;
+    background: #404040;
+    color: #fff;
+    border: 4px solid #00A826;
+
+    h5{
+        margin-top: 5px;
+    }
+}
+
+
+
 .orbitx-mobile-link {
     display: flex;
     align-items: center;

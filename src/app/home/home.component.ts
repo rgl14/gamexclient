@@ -29,4 +29,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  navigateorbitapp(){
+    var finalurl="http://newclient.duoexchange.com/#/home"
+    window.open(finalurl,"_blank");
+  }
+
 }
