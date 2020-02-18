@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   navigateorbitapp(){
-    var finalurl="http://newclient.duoexchange.com/#/home"
+    var finalurl="http://orbitx247.com/#/home"
     window.open(finalurl,"_blank");
   }
 

@@ -176,7 +176,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           // console.log(resp._userMatchedBets[this.matchId])
           // this.matchbets=this.dataformat.matchUnmatchBetsFormat(resp,this.matchId);
           this.matchbets=resp._userMatchedBets[this.matchId];
-          // console.log(this.matchbets);
+          console.log(this.matchbets);
         }
       })
   }
@@ -249,12 +249,10 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       this.showtv = true;
       if (this.tvConfig != null && this.tvConfig.channelIp != null) {
         $("#streamingBox").fadeIn();
-        this.baseUrl =
-          "https://shivexch.com/tv_api/live_tv/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf";
+        this.baseUrl="https://shivexch.com/tv_api/live_tv/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf";
       } else {
         $("#streamingBox").fadeIn();
-        this.baseUrl =
-          "https://shivexch.com/tv_api/animation/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf";
+        this.baseUrl="https://shivexch.com/tv_api/animation/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf";
       }
 
       let blogUrl: any = `${this.baseUrl}&mtid=${this.mtBfId}`;
@@ -451,7 +449,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   getbmexposure(bookid){
     this.common.getBMexposurebook(this.mktId,bookid).subscribe(data=>{
       if(data!=null){
-        console.log(data);
+        // console.log(data);
         this.bmexposure=data.data;
         _.forEach(this.bmexposure, (item, index) => {
           var runnerName = item.Key.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '_');
@@ -551,9 +549,9 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     this.placeBookData = {
       backlay: backLay,
       bookId: bookId,
-      bookType: bookType,
+      // bookType: bookType,
       eventId: matchId,
-      marketId: marketId,
+      marketId:this.mktId,
       odds: odds,
       runnerId: runnerId,
       runnerName: runnerName,
@@ -579,6 +577,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       fancyId: fancyId,
       matchId: matchId,
       mktBfId: this.mktBfId,
+      marketId:this.mktId,
       matchBfId: bfId,
       rate: rate,
       runnerName: fancyName,
