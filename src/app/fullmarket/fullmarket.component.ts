@@ -82,6 +82,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   allmatchbetsource: Subscription;
 
   isGameX: boolean = false;
+  betclosestatus: boolean=true;
 
   constructor(
     private route:ActivatedRoute,
@@ -176,7 +177,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           // console.log(resp._userMatchedBets[this.matchId])
           // this.matchbets=this.dataformat.matchUnmatchBetsFormat(resp,this.matchId);
           this.matchbets=resp._userMatchedBets[this.matchId];
-          console.log(this.matchbets);
+          // console.log(this.matchbets);
         }
       })
   }
@@ -249,10 +250,10 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       this.showtv = true;
       if (this.tvConfig != null && this.tvConfig.channelIp != null) {
         $("#streamingBox").fadeIn();
-        this.baseUrl="https://shivexch.com/tv_api/live_tv/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf";
+        this.baseUrl="https://shivexch.com/tv_api/live_tv/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf&mtid="+this.mtBfId;
       } else {
         $("#streamingBox").fadeIn();
-        this.baseUrl="https://shivexch.com/tv_api/animation/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf";
+        this.baseUrl="https://shivexch.com/tv_api/animation/index.html?token=3af0f960-daba-47ea-acc2-a04b7ecf44bf&mtid="+this.mtBfId;
       }
 
       let blogUrl: any = `${this.baseUrl}&mtid=${this.mtBfId}`;
@@ -378,7 +379,13 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           this.homeFancyData = fancy.data;
           if(this.bookMakingData.length!=0){
             _.forEach(this.bookMakingData,(item,index)=>{
-              item["oldPnl"]=this.bmexposure
+                if(item.name=="BOOK MAKING"){
+                  if(item.runnerData[0].ballStatus=="SUSPENDED" && item.runnerData[1].ballStatus=="SUSPENDED"){
+                    this.betclosestatus=true;
+                  }else{
+                    this.betclosestatus=false;
+                  }
+                }
             })
           }
           // console.log(this.bookMakingData);
