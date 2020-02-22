@@ -498,7 +498,7 @@
          <dd  class="suspend" style="font-weight: 900;color: green;" [ngStyle]="{'display':(runner.ballStatus!='')?'flex':'none'}" *ngIf="!betclosestatus">
             <p>Bet Open</p>
          </dd>
-         <dd  class="suspend" style="font-weight: 900;color: red;" [ngStyle]="{'display':(runner.ballStatus!='')?'flex':'none'}" *ngIf="betclosestatus">
+         <dd  class="suspend" style="font-weight: 900" [ngStyle]="{'display':(runner.ballStatus!='')?'flex':'none'}" *ngIf="betclosestatus">
             <p>Bet Closed</p>
          </dd>
          <dd  class="suspend" style="display: none;">
