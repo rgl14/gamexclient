@@ -133,15 +133,14 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   
 
   setToken(){
-    var url_string = window.location.href; //window.location.href
+    // var url_string = window.location.href; //window.location.href
     // console.log(url_string.split("#").join("."))
-    var url = new URL(url_string.split("#").join("."));
+    // var url = new URL(url_string.split("#").join("."));
     // console.log(url)
-    var auth = url.searchParams.get("token");
-    console.log(auth);
-    if(auth!=null){
-      this.cookie.set( 'charlie', auth );
-    }
+    // var auth = url.searchParams.get("token");
+    // if(auth!=null){
+    //   this.cookie.set( 'charlie', auth );
+    // }
   }
 
   allMKTdata(){
@@ -380,7 +379,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           if(this.bookMakingData.length!=0){
             _.forEach(this.bookMakingData,(item,index)=>{
                 if(item.name=="BOOK MAKING"){
-                  if(item.runnerData[0].ballStatus=="SUSPENDED" && item.runnerData[1].ballStatus=="SUSPENDED"){
+                  if((item.runnerData[0].ballStatus=="SUSPENDED" && item.runnerData[1].ballStatus=="SUSPENDED")|| (item.runnerData[0].ballStatus=="INACTIVE" && item.runnerData[1].ballStatus=="INACTIVE")){
                     this.betclosestatus=true;
                   }else{
                     this.betclosestatus=false;
@@ -388,7 +387,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
                 }
             })
           }
-          // console.log(this.bookMakingData);
+          // console.log(this.betclosestatus);
           _.forEach(this.homeFancyData, (item, index) => {
             // this.bookrunnerData = item.runnerData;
             if (this.fancyExposure != null && this.fancyExposure != undefined) {
