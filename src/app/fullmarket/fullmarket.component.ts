@@ -173,8 +173,6 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       })
       this.allmatchbetsource=this.sharedata.allMatchUnmatchBetsSource.subscribe(resp=>{
         if(resp!=null){
-          // console.log(resp._userMatchedBets[this.matchId])
-          // this.matchbets=this.dataformat.matchUnmatchBetsFormat(resp,this.matchId);
           this.matchbets=resp._userMatchedBets[this.matchId];
           // console.log(this.matchbets);
         }
@@ -193,7 +191,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       //   this.marketodds.connectMarket(this.markethubAddress,this.homeMarkets);
       //   this.MarketsignalrData();
       // }
-      if(this.fancyHubAddress!=null && this.sprtId === '4'){
+      if(this.fancyHubAddress!=null){
         this.fancymarket.connectFancy(this.fancyHubAddress,this.matchId);
         this.FancysignalrData();
       }
@@ -218,7 +216,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           })
         })
       }
-      this.scorecardresponse(this.matchId,this.homeFancyData)
+      this.scorecardresponse(this.matchId)
     })
     _.forEach(this.homeMarkets, (item1, index) => {
       console.log(item1)
@@ -435,10 +433,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     })
   }
 
-  scorecardresponse(matchid,fancy){
-    _.forEach(fancy, (item, index) => {
-      // console.log(item.id)
-    })
+  scorecardresponse(matchid){
     this.scoreData=this.score.scoreSource.subscribe(data=>{
       // console.log(data);
       if (data != null) {
@@ -496,9 +491,14 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   ngOnDestroy() {
     this.eventData.unsubscribe();
     this.allmatchbetsource.unsubscribe();
+    this.fancyoddsignalr.unsubscribe();
+    this.scoreData.unsubscribe();
     this.marketodds.UnsuscribeMarkets(this.homeMarkets);
     this.fancymarket.UnsuscribeFancy(this.matchId);
     this.score.unSubscribeMatchScore(this.mtBfId);
+    if(this.Marketoddssignalr){
+      this.Marketoddssignalr.unsubscribe();
+    }
   }
  
 
