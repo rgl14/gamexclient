@@ -824,10 +824,12 @@
                               {{marketbets.stake | number:'1.2-2'}} @ {{marketbets.odds}} to win
                               <span *ngIf="marketbets.isFancy==0"
                                  class=" ">{{(marketbets.odds-1)*marketbets.stake | number:'1.2-2'}}</span>
-                              <span *ngIf="marketbets.isFancy==2"
-                                 class=" ">{{(marketbets.odds-1)/100*marketbets.stake | number:'1.2-2'}}</span>
+                              <span *ngIf="marketbets.isFancy==2 && marketbets.marketName=='BookMaking'"
+                                 class=" ">{{marketbets.odds*marketbets.stake/100 | number:'1.2-2'}}</span>
+                              <span *ngIf="marketbets.isFancy==2  && marketbets.marketName=='To Win The Toss'"
+                                 class=" ">{{(marketbets.odds-1)*marketbets.stake  | number:'1.2-2'}}</span>
                               <span *ngIf="marketbets.isFancy==1"
-                                 class=" ">{{(marketbets.odds/100)*marketbets.stake | number:'1.2-2'}}</span>
+                                 class=" ">{{(marketbets.odds*marketbets.stake/100) | number:'1.2-2'}}</span>
                               .</a>
                            <div class="wrapper">
                               <div class="bet-details">
@@ -852,10 +854,12 @@
                               {{marketbets.stake | number:'1.2-2'}} @ {{marketbets.odds}} to win
                               <span *ngIf="marketbets.isFancy==0"
                                  class=" ">{{(marketbets.odds-1)*marketbets.stake | number:'1.2-2'}}</span>
-                              <span *ngIf="marketbets.isFancy==2"
-                                 class=" ">{{(marketbets.odds-1)/100*marketbets.stake | number:'1.2-2'}}</span>
+                              <span *ngIf="marketbets.isFancy==2  && marketbets.marketName=='BookMaking'"
+                                 class=" ">{{marketbets.odds*marketbets.stake/100 | number:'1.2-2'}}</span>
+                              <span *ngIf="marketbets.isFancy==2  && marketbets.marketName=='To Win The Toss'"
+                                 class=" ">{{(marketbets.odds-1)*marketbets.stake  | number:'1.2-2'}}</span>
                               <span *ngIf="marketbets.isFancy==1"
-                                 class=" ">{{(marketbets.odds/100)*marketbets.stake | number:'1.2-2'}}</span>
+                                 class=" ">{{(marketbets.odds*marketbets.stake/100) | number:'1.2-2'}}</span>
                               .</a>
                            <div class="wrapper">
                               <div class="bet-details">
