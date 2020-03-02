@@ -33,6 +33,7 @@ export class InplayComponent implements OnInit,OnDestroy {
   betsTable: any;
 
   showRecentList: boolean = true;
+  totalPNL: any;
   constructor(
     private commonservice:CommonService,
     private sharedata:SharedataService,
@@ -101,7 +102,7 @@ export class InplayComponent implements OnInit,OnDestroy {
     this.showRecentList = !this.showRecentList;
     this.betsTable = pnlData;
     this.betsTable.matchName = pnlData.market.split('>')[1];
-
+    this.totalPNL=this.betsTable.pnl;
     // console.log(pnlData);
     
   }
