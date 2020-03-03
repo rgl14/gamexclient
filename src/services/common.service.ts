@@ -13,8 +13,7 @@ export class CommonService {
   }
 
   constructor(private httpclient:HttpClient,private cookie:CookieService) { }
-  public apiurl:string="http://173.249.43.228/GoLuckyClient/Client.svc"
-  // public apilink:string="http://139.180.146.253/DtsGlobalMaintenance/api/postFile"
+  public apiurl:string="http://www.gamex247.com/Client/Client.svc"
   public authtoken=this.cookie.get('charlie');
 
   uservalidate():boolean{
