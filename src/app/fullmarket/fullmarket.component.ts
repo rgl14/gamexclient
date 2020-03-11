@@ -12,6 +12,8 @@ import { ScoreboardService } from '../scoreboard.service';
 import { SharedataService } from '../sharedata.service';
 import { HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import * as io from 'socket.io-client';
+
 
 @Component({
   selector: 'app-fullmarket',
@@ -80,9 +82,10 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   fancypanelsetting: any;
   matchbets=[];
   allmatchbetsource: Subscription;
-
+  BSFscore:any;
   isGameX: boolean = false;
   betclosestatus: boolean=true;
+  socket: any;
 
   constructor(
     private route:ActivatedRoute,
@@ -95,7 +98,9 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     private deviceInfo:DeviceDetectorService,
     public notification :NotificationService,
     private score:ScoreboardService,
-    private cookie:CookieService) { }
+    private cookie:CookieService) {
+      this.socket = io('http://139.180.146.253:3000');
+     }
 
   ngOnInit() {
     this.TvWidth = window.innerWidth;
@@ -438,7 +443,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       // console.log(data);
       if (data != null) {
         this.fullScore = data[0];
-        // console.log(this.fullScore);
+        console.log(this.fullScore);
         if (this.fullScore != undefined) {
           this.showScore = true;
         } else {
@@ -447,6 +452,19 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       }
     })
   }
+  socketConnection(mtbfid){
+    this.socket.emit('market_login_main',mtbfid);
+    this.socket.on('sendSkyScoreData',function(data){
+        console.log(parseInt(mtbfid));
+        if (parseInt(mtbfid)==data.matchBfId) {
+           this.BSFscore=data;
+           console.log(this.BSFscore);
+        }
+        else{
+            this.disconnect();
+        }
+    });
+}
   getbmexposure(bookid){
     this.common.getBMexposurebook(this.mktId,bookid).subscribe(data=>{
       if(data!=null){
@@ -489,16 +507,25 @@ export class FullmarketComponent implements OnInit,OnDestroy {
       });
   }
   ngOnDestroy() {
-    this.eventData.unsubscribe();
-    this.allmatchbetsource.unsubscribe();
-    this.fancyoddsignalr.unsubscribe();
-    this.scoreData.unsubscribe();
-    this.marketodds.UnsuscribeMarkets(this.homeMarkets);
-    this.fancymarket.UnsuscribeFancy(this.matchId);
-    this.score.unSubscribeMatchScore(this.mtBfId);
+    if(this.eventData){
+      this.eventData.unsubscribe();
+    }
+    if(this.allmatchbetsource){
+      this.allmatchbetsource.unsubscribe();
+    }
+    if(this.fancyoddsignalr){
+      this.fancyoddsignalr.unsubscribe();
+    }
     if(this.Marketoddssignalr){
       this.Marketoddssignalr.unsubscribe();
     }
+    if(this.scoreData){
+      this.scoreData.unsubscribe();
+    }
+    this.socket.disconnect();
+    this.marketodds.UnsuscribeMarkets(this.homeMarkets);
+    this.fancymarket.UnsuscribeFancy(this.matchId);
+    this.score.unSubscribeMatchScore(this.mtBfId);
   }
  
 
