@@ -10,10 +10,9 @@ import { DeviceDetectorService } from "ngx-device-detector";
 import { NotificationService } from '../shared/notification.service';
 import { ScoreboardService } from '../scoreboard.service';
 import { SharedataService } from '../sharedata.service';
-import { HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import * as io from 'socket.io-client';
-
+var BSFDATA:any;
 
 @Component({
   selector: 'app-fullmarket',
@@ -117,7 +116,8 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     this.confirmPlaceMarketData = null;
     if (this.sprtId === '4') {
       let MatchScoreHubAddress = "http://178.238.236.221:13681";
-      this.score.MatchScoreSignalr(MatchScoreHubAddress, this.mtBfId);
+      // this.score.MatchScoreSignalr(MatchScoreHubAddress, this.mtBfId);
+      this.socketConnection(this.mtBfId);
       // console.log(this.mtBfId,this.sprtId)
     } else if (this.sprtId === '2') {
       let MatchScoreHubAddress = "http://178.238.236.221:13683";
@@ -221,7 +221,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
           })
         })
       }
-      this.scorecardresponse(this.matchId)
+      // this.scorecardresponse(this.matchId)
     })
     _.forEach(this.homeMarkets, (item1, index) => {
       console.log(item1)
@@ -273,6 +273,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     this.Marketoddssignalr=this.marketodds.marketSource.subscribe(runner=>{
       if (runner != null) {
         // console.log(runner);
+        
         this.eventData.unsubscribe();
         let marketIndex = _.findIndex(this.homeMarkets, function(o) {
           return o.bfId == runner.marketid;
@@ -370,10 +371,29 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     return pnlClass;
   }
 
+  socketConnection(mtbfid){
+    this.socket.emit('market_login_main',mtbfid);
+    this.socket.on('sendSkyScoreData',function(data){
+        // console.log(data)
+        if (parseInt(mtbfid)==data.matchBfId) {
+          BSFDATA=data;
+        }
+        else{
+            this.socket.disconnect();
+        }
+    });
+}
+
+setDatabsfScore(){
+  this.BSFscore=BSFDATA;
+  // console.log(this.BSFscore);
+}
+
   FancysignalrData(){
     this.fancyoddsignalr=this.fancymarket.fancySource.subscribe(fancy=>{
         if (fancy != null) {
           // console.log(fancy);
+          this.setDatabsfScore();
           this.eventData.unsubscribe();
           this.curTime = fancy.curTime;
           this.bookMakingData = fancy.bookRates;
@@ -438,33 +458,21 @@ export class FullmarketComponent implements OnInit,OnDestroy {
     })
   }
 
-  scorecardresponse(matchid){
-    this.scoreData=this.score.scoreSource.subscribe(data=>{
-      // console.log(data);
-      if (data != null) {
-        this.fullScore = data[0];
-        console.log(this.fullScore);
-        if (this.fullScore != undefined) {
-          this.showScore = true;
-        } else {
-          this.showScore = false;
-        }
-      }
-    })
-  }
-  socketConnection(mtbfid){
-    this.socket.emit('market_login_main',mtbfid);
-    this.socket.on('sendSkyScoreData',function(data){
-        console.log(parseInt(mtbfid));
-        if (parseInt(mtbfid)==data.matchBfId) {
-           this.BSFscore=data;
-           console.log(this.BSFscore);
-        }
-        else{
-            this.disconnect();
-        }
-    });
-}
+  // scorecardresponse(matchid){
+  //   this.scoreData=this.score.scoreSource.subscribe(data=>{
+  //     // console.log(data);
+  //     if (data != null) {
+  //       this.fullScore = data[0];
+  //       console.log(this.fullScore);
+  //       if (this.fullScore != undefined) {
+  //         this.showScore = true;
+  //       } else {
+  //         this.showScore = false;
+  //       }
+  //     }
+  //   })
+  // }
+
   getbmexposure(bookid){
     this.common.getBMexposurebook(this.mktId,bookid).subscribe(data=>{
       if(data!=null){
