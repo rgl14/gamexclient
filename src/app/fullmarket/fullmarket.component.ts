@@ -85,6 +85,7 @@ export class FullmarketComponent implements OnInit,OnDestroy {
   isGameX: boolean = false;
   betclosestatus: boolean=true;
   socket: any;
+  liveScore: any;
 
   constructor(
     private route:ActivatedRoute,
@@ -395,6 +396,7 @@ setDatabsfScore(){
           // console.log(fancy);
           this.setDatabsfScore();
           this.eventData.unsubscribe();
+          this.liveScore=fancy.liveScore;
           this.curTime = fancy.curTime;
           this.bookMakingData = fancy.bookRates;
           // this.bookrunnerData = this.bookMakingData.runnerData;

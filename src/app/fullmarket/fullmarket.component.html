@@ -150,6 +150,7 @@
             </div>
       </ng-container>
 
+      <!-- Auto Score From 365 Design -->
       <ng-container *ngIf="BSFscore">
             <div class="circket_wrapper">
                <header>
@@ -229,7 +230,87 @@
                       </div> -->
                </div>
             </div>
-         </ng-container>
+      </ng-container>
+
+      <!-- Manual Score Design -->
+      <ng-container *ngIf="liveScore">
+         <div class="circket_wrapper">
+            <header>
+               <div class="main_score_wrap">
+                  <div class="header_left">
+                     <div class="header_team_block">
+                        <div class="team_block_left">
+                           <span class="ball_img" *ngIf="liveScore.data[0].status==1"><img alt="" src="https://bw.sixlogics.com/cricket/assets/images/green_bat.png"></span>
+                           <span class="ball_img" *ngIf="liveScore.data[0].status==0"><img alt="" src="https://bw.sixlogics.com/cricket/assets/images/red_ball.png?v=1.0"></span>
+                       </div>
+                        <div class="team_block_right">
+                           <h3>
+                             <span>{{liveScore.data[0].teamName}}</span>
+                           </h3>
+                             <span class="score">{{liveScore.data[0].score}} / {{liveScore.data[0].wickets}}
+                             <span class="over">({{liveScore.data[0].overs}})</span>
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="header_center">
+                     <span>{{liveScore.tossResult}}</span><br>
+                     <span *ngIf="liveScore.data[0].status==1">{{liveScore.data[0].lastScore}} {{liveScore.comments}}</span>
+                     <span *ngIf="liveScore.data[1].status==1">{{liveScore.data[1].lastScore}} {{liveScore.comments}}</span><br>
+                     <span>{{liveScore.matchResult}}</span>
+                   </div>
+                  <div class="header_right">
+                     <div class="header_team_block">
+                        <div class="team_block_left">
+                           <h3>
+                             <span>{{liveScore.data[1].teamName}}</span>
+                           </h3>
+                           <span class="score">{{liveScore.data[1].score}} / {{liveScore.data[1].wickets}}
+                             <span class="over">({{liveScore.data[1].overs}})</span>
+                           </span>
+                        </div>
+                        <div class="team_block_right">
+                           <span class="ball_img" *ngIf="liveScore.data[1].status==1"><img alt="" src="https://bw.sixlogics.com/cricket/assets/images/green_bat.png"></span>
+                           <span class="ball_img" *ngIf="liveScore.data[1].status==0"><img alt="" src="https://bw.sixlogics.com/cricket/assets/images/red_ball.png?v=1.0"></span>
+                       </div>
+                     </div>
+                  </div>
+               </div>
+            </header>
+            <div class="live_footer_content">
+               <div class="live_footer_top">
+                  <div class="live_footer_left" >
+                     <h4 *ngIf="liveScore.data[0].status==1">Overs: {{liveScore.data[0].overs}}</h4>
+                     <h4 *ngIf="liveScore.data[1].status==1">Overs: {{liveScore.data[1].overs}}</h4>
+                  </div>
+                  <!-- <div class="live_footer_right">
+                     <ul class="footer_status_list">
+                               <li><span class="footer_status_left">Balls Remaining:</span><span class="footer_status_right">0</span></li>
+                               <li><span class="footer_status_left">Runs required:</span><span class="footer_status_right">23</span></li>
+                           </ul>
+                           <ul class="recent_over_list">
+                              <li class="no-class"> <span>1</span> </li>
+                              <li class="no-class"> <span>0</span> </li>
+                              <li class="no-class"> <span>1</span> </li>
+                              <li class="no-class"> <span>1</span> </li>
+                              <li class="wicket"> <span>W</span> </li>
+                              <li class="no-class"> <span>0</span> </li>
+                          </ul>
+                  </div> -->
+               </div>
+               <!-- <div class="live_footer_bot">
+                       <div class="last_recent_overs">
+                           <h4>Last 3 Overs:</h4>
+                           <ul>
+                               <li><span class="no-class"> 2 </span><span class="no-class"> 1 </span><span class="no-class"> 1 </span><span class="no-class"> 1 </span><span class="no-class"> 1 </span><span class="no-class"> 1 </span></li>
+                               <li><span class="no-class"> 1 </span><span class="no-class"> 1 </span><span class="no-class"> 2 </span><span class="no-class"> 2 </span><span class="no-class"> 1<sub>lb</sub> </span><span class="no-class"> 1<sub>lb</sub> </span></li>
+                               <li><span class="wicket"> W </span><span class="no-class"> 1 </span><span class="wicket"> W </span><span class="no-class"> 1 </span><span class="no-class"> 0 </span><span class="no-class"> 1 </span></li>
+                           </ul>
+                       </div>
+               </div> -->
+            </div>
+         </div>
+      </ng-container>
 
       <table id="tennisScoreBoard" *ngIf="sprtId==='2' && showScore" class="game-team" [ngClass]="fullScore==undefined?'':'tennis'"  style="display: table;">
          <tbody>
